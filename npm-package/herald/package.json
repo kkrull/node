@@ -1,0 +1,14 @@
+{
+  "author": "Kyle Krull",
+  "description": "A herald program that shouts greetings at people",
+  "devDependencies": {
+    "mocha": "6.1.4"
+  },
+  "license": "UNLICENSED",
+  "name": "herald",
+  "scripts": {
+    "start": "node main.js",
+    "test": "mocha"
+  },
+  "version": "0.0.1"
+}
