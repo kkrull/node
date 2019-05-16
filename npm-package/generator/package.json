@@ -1,6 +1,9 @@
 {
   "author": "Kyle Krull",
   "description": "A name generator package to get used somewhere else",
+  "dependencies": {
+    "namor": "1.1.2"
+  },
   "devDependencies": {
     "mocha": "6.1.4"
   },
@@ -15,8 +18,5 @@
     "pack": "npm pack",
     "test": "mocha"
   },
-  "version": "0.0.2",
-  "dependencies": {
-    "namor": "1.1.2"
-  }
+  "version": "0.0.3"
 }
