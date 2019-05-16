@@ -1,6 +1,9 @@
 {
   "author": "Kyle Krull",
   "description": "A herald program that shouts greetings at people",
+  "dependencies": {
+    "greeter": "file:../greeter"
+  },
   "devDependencies": {
     "mocha": "6.1.4"
   },
