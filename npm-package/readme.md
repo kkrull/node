@@ -15,4 +15,5 @@ then run it
     > herald@0.0.1 start .../node-sandbox/npm-package/herald
     > node main.js
     
-    Hello monstrous oak
+    Hello super bacon
+    Run along now, and solve one problem without creating any new ones
