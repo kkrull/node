@@ -1,10 +1,6 @@
+const Commander = require('./commander').Commander;
 const Greeter = require('greeter').Greeter;
 const NameGenerator = require('generator').NameGenerator;
-
-const Commander = function() { };
-Commander.prototype.assignMission = () => {
-  return 'solve one problem without creating any new ones';
-};
 
 const commander = new Commander();
 const generator = new NameGenerator();
