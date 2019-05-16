@@ -8,6 +8,7 @@
   "main": "index.js",
   "name": "greeter",
   "scripts": {
+    "pack": "npm pack",
     "test": "mocha"
   },
   "version": "0.0.1"
