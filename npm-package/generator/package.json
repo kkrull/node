@@ -1,21 +1,18 @@
 {
   "author": "Kyle Krull",
-  "description": "A herald program that shouts greetings at people",
-  "dependencies": {
-    "generator": "file:../generator/generator-0.0.1.tgz",
-    "greeter": "file:../greeter"
-  },
+  "description": "A name generator package to get used somewhere else",
   "devDependencies": {
     "mocha": "6.1.4"
   },
   "license": "UNLICENSED",
-  "name": "herald",
+  "main": "index.js",
+  "name": "generator",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kkrull/node-sandbox.git"
   },
   "scripts": {
-    "start": "node main.js",
+    "pack": "npm pack",
     "test": "mocha"
   },
   "version": "0.0.1"
