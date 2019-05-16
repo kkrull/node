@@ -1,0 +1,14 @@
+{
+  "author": "Kyle Krull",
+  "description": "A widget package to get used somewhere else",
+  "devDependencies": {
+    "mocha": "6.1.4"
+  },
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "name": "widget",
+  "scripts": {
+    "test": "mocha"
+  },
+  "version": "0.0.1"
+}
