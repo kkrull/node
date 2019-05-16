@@ -15,7 +15,8 @@
     "url": "git+https://github.com/kkrull/node-sandbox.git"
   },
   "scripts": {
-    "build": "npm run generator:build && npm run greeter:build",
+    "build": "npm run commander:build && npm run generator:build && npm run greeter:build",
+    "commander:build": "cd ../commander && npm run pack",
     "generator:build": "cd ../generator && npm run pack",
     "greeter:build": "cd ../greeter && npm run pack",
     "start": "node main.js",

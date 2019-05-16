@@ -1,4 +1,4 @@
-const Commander = require('./commander').Commander;
+const Commander = require('../commander').Commander;
 const Greeter = require('greeter').Greeter;
 const NameGenerator = require('generator').NameGenerator;
 
