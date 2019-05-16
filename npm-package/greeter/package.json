@@ -7,6 +7,10 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "name": "greeter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkrull/node-sandbox.git"
+  },
   "scripts": {
     "pack": "npm pack",
     "test": "mocha"

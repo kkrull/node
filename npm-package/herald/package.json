@@ -9,6 +9,10 @@
   },
   "license": "UNLICENSED",
   "name": "herald",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkrull/node-sandbox.git"
+  },
   "scripts": {
     "start": "node main.js",
     "test": "mocha"
