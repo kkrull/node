@@ -1,12 +1,12 @@
 {
   "author": "Kyle Krull",
-  "description": "A widget package to get used somewhere else",
+  "description": "A greeter package to get used somewhere else",
   "devDependencies": {
     "mocha": "6.1.4"
   },
   "license": "UNLICENSED",
   "main": "index.js",
-  "name": "widget",
+  "name": "greeter",
   "scripts": {
     "test": "mocha"
   },
