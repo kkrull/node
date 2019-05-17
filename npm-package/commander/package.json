@@ -2,6 +2,8 @@
   "author": "Kyle Krull",
   "description": "Gives people a mission",
   "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "@babel/core": "7.4.4",
     "mocha": "6.1.4"
   },
   "license": "UNLICENSED",
@@ -12,6 +14,7 @@
     "url": "git+https://github.com/kkrull/node-sandbox.git"
   },
   "scripts": {
+    "build": "babel index.js -d dist && babel src -d dist/src",
     "pack": "npm pack",
     "test": "mocha"
   },
