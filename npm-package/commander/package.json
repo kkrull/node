@@ -8,7 +8,7 @@
     "mocha": "6.1.4"
   },
   "license": "UNLICENSED",
-  "main": "index.js",
+  "main": "dist/index.js",
   "name": "commander",
   "repository": {
     "type": "git",
@@ -16,8 +16,9 @@
   },
   "scripts": {
     "build": "babel index.js --delete-dir-on-start --out-dir dist --verbose && babel src --out-dir dist/src --verbose",
+    "clean": "rm -Rf dist/*",
     "pack": "npm pack",
     "test": "mocha"
   },
-  "version": "0.0.1"
+  "version": "0.0.2"
 }

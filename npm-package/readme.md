@@ -26,3 +26,14 @@ The `herald` module is the main program, which imports code from other modules a
 - The `greeter` module is imported as a directory dependency.
 - The `generator` module is a plain ES5 module that is imported as a tarball dependency.
 - The `commander` module is an ES6 module that is transpiled to ES5, and imported as a tarball dependency.
+
+
+Specific build and installation instructions follow.
+
+
+### Commander
+
+    commander/ user$ npm run clean
+    commander/ user$ npm run build  #Transpiles source to dist/
+    commander/ user$ npm run pack   #Creates commander-<version>.tgz from files in dist/
+    herald/ user$ npm install ../commander-<version>.tgz
