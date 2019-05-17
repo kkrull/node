@@ -14,7 +14,7 @@
     "url": "git+https://github.com/kkrull/node-sandbox.git"
   },
   "scripts": {
-    "build": "babel index.js -d dist && babel src -d dist/src",
+    "build": "babel index.js --delete-dir-on-start --out-dir dist --verbose && babel src --out-dir dist/src --verbose",
     "pack": "npm pack",
     "test": "mocha"
   },
