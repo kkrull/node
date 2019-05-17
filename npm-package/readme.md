@@ -1,4 +1,4 @@
-# NPM Package Experiment 1
+# NPM Package Experiment
 
 How do NPM packages work?  Build a town crier -- `herald` -- and find out!
 
@@ -17,3 +17,12 @@ then run it
     
     Hello super bacon
     Run along now, and solve one problem without creating any new ones
+
+
+## Modules
+
+The `herald` module is the main program, which imports code from other modules as follows:
+
+- The `greeter` module is imported as a directory dependency.
+- The `generator` module is a plain ES5 module that is imported as a tarball dependency.
+- The `commander` module is an ES6 module that is transpiled to ES5, and imported as a tarball dependency.
