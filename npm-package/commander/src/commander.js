@@ -5,4 +5,4 @@ class Commander {
 }
 
 
-module.exports.Commander = Commander;
+module.exports = { Commander };

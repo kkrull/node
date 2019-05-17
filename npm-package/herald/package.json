@@ -2,7 +2,7 @@
   "author": "Kyle Krull",
   "description": "A herald program that shouts greetings at people",
   "dependencies": {
-    "commander": "file:../commander/commander-0.0.3.tgz",
+    "commander": "file:../commander/commander-0.0.4.tgz",
     "generator": "file:../generator/generator-0.0.3.tgz",
     "greeter": "file:../greeter"
   },
