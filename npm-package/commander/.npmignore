@@ -1,4 +1,5 @@
 *.tgz
 .babelrc
+index.js
 src/
 test/
