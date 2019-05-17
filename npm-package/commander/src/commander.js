@@ -1,7 +1,8 @@
-const Commander = function() { };
+class Commander {
+  assignMission() {
+    return 'solve one problem without creating any new ones';
+  };
+}
 
-Commander.prototype.assignMission = () => {
-  return 'solve one problem without creating any new ones';
-};
 
 module.exports.Commander = Commander;
