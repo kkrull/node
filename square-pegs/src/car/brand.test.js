@@ -35,4 +35,22 @@ describe("<BrandSelector />", () => {
       })
     );
   });
+
+  describe('.onChange', async() => {
+    it('clicking a <Brand /> calls .onChange, if it was not already selected', () => {
+      const onBrandChanged = jest.fn();
+      const selectorWrapper = shallow(
+        <BrandSelector
+          brands={[{ id: '1', name: 'unselected' }]}
+          onBrandClicked={() => {}}
+          selection={false}
+        />
+      );
+
+      const brandWrapper = selectorWrapper.find(Brand);
+      brandWrapper.simulate('click');
+      // selectorWrapper.update();
+      expect(onBrandChanged).toBeCalled();
+    });
+  });
 });
