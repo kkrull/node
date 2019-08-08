@@ -3,12 +3,10 @@ import React from "react";
 
 export function Brand({ id, isSelected, name, onClicked }) {
   const onClickedThis = () => onClicked(id);
+  const classNames = (isSelected && "brand__name brand--selected") || "brand__name";
 
   return (
-    <h3
-      className={(isSelected && "brand__name brand--selected") || "brand__name"}
-      onClick={onClickedThis}
-    >
+    <h3 className={classNames} onClick={onClickedThis}>
       {name}
     </h3>
   );

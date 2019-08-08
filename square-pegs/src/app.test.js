@@ -5,12 +5,9 @@ import App from "./app";
 import BrandSelector from "./car/brand";
 
 function carServiceReturning(options) {
-  const stubValues = Object.assign(
-    {
-      fetchAllBrandNames: Promise.resolve([])
-    },
-    options
-  );
+  const stubValues = Object.assign({
+    fetchAllBrandNames: Promise.resolve([])
+  }, options);
 
   const carService = { fetchAllBrandNames: jest.fn() };
   carService.fetchAllBrandNames.mockReturnValue(stubValues.fetchAllBrandNames);
