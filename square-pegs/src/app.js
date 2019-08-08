@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import BrandSelector from "./brand";
-import CarService from "./carService";
+import BrandSelector from "./car/brand";
+import CarService from "./car/carService";
 import "./styles.css";
 
 export default class App extends React.Component {

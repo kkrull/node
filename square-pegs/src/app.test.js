@@ -2,7 +2,7 @@ import React from "react";
 import { mount, shallow } from "enzyme";
 
 import App from "./app";
-import BrandSelector from "./brand";
+import BrandSelector from "./car/brand";
 
 function carServiceReturning(options) {
   const stubValues = Object.assign(
