@@ -26,14 +26,14 @@ describe("<App />", () => {
 
   it("has a <BrandSelector /> with an appropriate heading", () => {
     const appWrapper = shallow(<App carService={carServiceReturning()} />);
-    const makeWrapper = appWrapper.find(BrandSelector);
-    expect(makeWrapper.exists()).toBe(true);
+    const brandWrapper = appWrapper.find(BrandSelector);
+    expect(brandWrapper.exists()).toBe(true);
 
-    const makeHeading = appWrapper.find(".app__make-heading");
-    expect(makeHeading.text()).toEqual("Select a car make");
+    const brandHeading = appWrapper.find(".app__brand-heading");
+    expect(brandHeading.text()).toEqual("Select a car make");
   });
 
-  it("fetches known car makes and passes them to BrandSelector.brands", async() => {
+  it("fetches known car brands and passes them to BrandSelector.brands", async() => {
     const carService = carServiceReturning({
       fetchAllBrandNames: Promise.resolve([{ id: "bentley", name: "Bentley" }])
     });
@@ -42,8 +42,8 @@ describe("<App />", () => {
     appWrapper.update();
     expect(carService.fetchAllBrandNames).toBeCalled();
 
-    const makeSelectorWrapper = appWrapper.find(BrandSelector);
-    expect(makeSelectorWrapper.prop("brands")).toContainEqual({
+    const brandSelectorWrapper = appWrapper.find(BrandSelector);
+    expect(brandSelectorWrapper.prop("brands")).toContainEqual({
       id: "bentley",
       name: "Bentley"
     });

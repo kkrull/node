@@ -39,7 +39,7 @@ export default class App extends React.Component {
       <div className="app__container">
         <h1 className="app__greeting">Find Your Auto Parts</h1>
 
-        <h2 className="app__make-heading">Select a car make</h2>
+        <h2 className="app__brand-heading">Select a car make</h2>
         <BrandSelector
           brands={this.state.brands}
           onBrandClicked={this.onBrandClicked}

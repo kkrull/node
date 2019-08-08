@@ -5,14 +5,17 @@ import BrandSelector, { Brand } from "./brand";
 
 describe("<BrandSelector />", () => {
   it("renders", () => {
-    const makeWrapper = shallow(
-      <BrandSelector onBrandClicked={() => { }} selection={false} />
+    const brandWrapper = shallow(
+      <BrandSelector
+        onBrandClicked={() => { }}
+        selection={false}
+      />
     );
-    expect(makeWrapper.exists()).toBe(true);
+    expect(brandWrapper.exists()).toBe(true);
   });
 
   it("renders a <Brand /> for each given brand", () => {
-    const makeWrapper = shallow(
+    const brandWrapper = shallow(
       <BrandSelector
         brands={[
           { id: "cheap", name: "Cheap" },
@@ -23,7 +26,7 @@ describe("<BrandSelector />", () => {
       />
     );
 
-    const brandWrappers = makeWrapper.find(Brand);
+    const brandWrappers = brandWrapper.find(Brand);
     expect(brandWrappers.length).toEqual(2);
     expect(brandWrappers.at(0).props()).toEqual(
       expect.objectContaining({

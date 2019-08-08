@@ -6,7 +6,7 @@ export function Brand({ id, isSelected, name, onClicked }) {
 
   return (
     <h3
-      className={(isSelected && "make__name make--selected") || "make__name"}
+      className={(isSelected && "brand__name brand--selected") || "brand__name"}
       onClick={onClickedThis}
     >
       {name}
