@@ -1,0 +1,8 @@
+.app__container {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.make--selected {
+  background-color: grey;
+}
