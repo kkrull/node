@@ -9,7 +9,7 @@
   "name": "api-proxy",
   "scripts": {
     "start": "node main.js",
-    "test": "curl 'http://localhost:3000' -v"
+    "test": "curl 'http://localhost:3000/hello' -v"
   },
   "version": "0.0.1"
 }
