@@ -12,6 +12,7 @@ app.get('/hello', (req, res) => {
 
 app.use(morgan('combined'));
 app.use('/api', proxy('http://dev.ghbeta.com:8950'));
+app.use('/', proxy('http://localhost:5101'));
 
 app.listen(bindPort, bindHost, () => {
   console.log(`Listening on http://${bindHost}:${bindPort}`);
