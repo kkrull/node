@@ -1,11 +1,15 @@
 {
   "author": "Kyle Krull",
   "description": "Try making a proxy server to run web and API servers from the same origin",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.6.0"
+  },
   "license": "UNLICENSED",
-  "main": "index.js",
   "name": "api-proxy",
   "scripts": {
-    "test": "echo 'Womp womp'"
+    "start": "node main.js",
+    "test": "curl 'http://localhost:3000' -v"
   },
   "version": "0.0.1"
 }
