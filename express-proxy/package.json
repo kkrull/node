@@ -3,7 +3,8 @@
   "description": "Try making a proxy server to run web and API servers from the same origin",
   "dependencies": {
     "express": "^4.17.1",
-    "express-http-proxy": "^1.6.0"
+    "express-http-proxy": "^1.6.0",
+    "morgan": "^1.9.1"
   },
   "license": "UNLICENSED",
   "name": "api-proxy",
