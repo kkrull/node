@@ -12,7 +12,11 @@
 
     <script>
       (function() {
-        fetchStatus();
+        const selfStatus = () => document.querySelector('.self__status');
+
+        fetchStatus('/health').then(status => {
+          selfStatus().textContent = status;
+        });
       })();
     </script>
   </body>

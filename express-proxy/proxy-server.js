@@ -17,12 +17,13 @@ class ProxyServer {
   listen() {
     const app = express();
     app.use(morgan('[Proxy] :method :url :status :response-time ms - :res[content-length]'));
-    app.use('/api', proxy(this.apiAddress));
-    app.use('/', proxy(this.webAddress));
-
+    
     app.get('/health', (_req, res) => {
       res.send("proxy ok\n");
     });
+
+    app.use('/api', proxy(this.apiAddress));
+    app.use('/', proxy(this.webAddress));
 
     return new Promise((resolve, reject) => {
       app.listen(this.port, this.host, () => {
