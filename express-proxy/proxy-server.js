@@ -3,10 +3,11 @@ const proxy = require('express-http-proxy');
 const morgan = require('morgan');
 
 class ProxyServer {
-  constructor(host, port, apiAddress) {
+  constructor(host, port, apiAddress, webAddress) {
     this.host = host;
     this.port = port;
     this.apiAddress = apiAddress;
+    this.webAddress = webAddress;
   }
 
   get address() {
@@ -17,6 +18,7 @@ class ProxyServer {
     const app = express();
     app.use(morgan('[Proxy] :method :url :status :response-time ms - :res[content-length]'));
     app.use('/api', proxy(this.apiAddress));
+    app.use('/', proxy(this.webAddress));
 
     app.get('/health', (_req, res) => {
       res.send("proxy ok\n");
