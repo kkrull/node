@@ -7,9 +7,13 @@ class ApiServer {
     this.port = port;
   }
 
+  get address() {
+    return `http://${this.host}:${this.port}`;
+  }
+
   listen() {
     const app = express();
-    app.use(morgan('[API] :method :url :status :response-time ms - :res[content-length]'));
+    app.use(morgan('[API]   :method :url :status :response-time ms - :res[content-length]'));
 
     app.get('/health', (_req, res) => {
       res.send("api ok\n");
@@ -17,7 +21,7 @@ class ApiServer {
 
     return new Promise((resolve, reject) => {
       app.listen(this.port, this.host, () => {
-        console.log(`API server listening on http://${this.host}:${this.port}`);
+        console.log(`API server listening on ${this.address}`);
         resolve();
       });
     });
