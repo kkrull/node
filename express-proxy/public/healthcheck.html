@@ -7,15 +7,21 @@
   <body>
     <h1>Health Check</h1>
     <ul>
-      <li>Status: <span class="self__status">Checking...</span></li>
+      <li>My own status: <span class="self__status">Checking...</span></li>
+      <li>API server status: <span class="api__status">Checking...</span></li>
     </ul>
 
     <script>
       (function() {
+        const apiStatus = () => document.querySelector('.api__status');
         const selfStatus = () => document.querySelector('.self__status');
 
         fetchStatus('/health').then(status => {
           selfStatus().textContent = status;
+        });
+
+        fetchStatus('/api/health').then(status => {
+          apiStatus().textContent = status;
         });
       })();
     </script>
