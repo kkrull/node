@@ -10,14 +10,17 @@ class ProxyServer {
 
   listen() {
     const app = express();
-    app.use(morgan('combined'));
+    app.use(morgan('[Proxy] :method :url :status :response-time ms - :res[content-length]'));
 
     app.get('/health', (_req, res) => {
-      res.send('ok');
+      res.send("proxy ok\n");
     });
 
-    app.listen(this.port, this.host, () => {
-      console.log(`Listening on http://${this.host}:${this.port}`);
+    return new Promise((resolve, reject) => {
+      app.listen(this.port, this.host, () => {
+        console.log(`Proxy sever listening on http://${this.host}:${this.port}`);
+        resolve();
+      });
     });
   }
 }
