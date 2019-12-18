@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Health Check</title>
+    <script src="healthcheck.js"></script>
+  </head>
+
+  <body>
+    <h1>Health Check</h1>
+    <ul>
+      <li>Status: <span class="self__status">Checking...</span></li>
+    </ul>
+
+    <script>
+      (function() {
+        fetchStatus();
+      })();
+    </script>
+  </body>
+</html>
