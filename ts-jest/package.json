@@ -1,0 +1,8 @@
+{
+  "name": "ts-jest-sandbox",
+  "version": "0.0.1",
+  "description": "Try out ts-jest",
+  "main": "index.js",
+  "author": "Kyle Krull",
+  "license": "MIT"
+}
