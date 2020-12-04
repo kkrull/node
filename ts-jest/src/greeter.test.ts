@@ -1,4 +1,4 @@
-import Greeter from "./greeter";
+import Greeter from './greeter';
 
 describe('Greeter', () => {
   let subject: Greeter;
