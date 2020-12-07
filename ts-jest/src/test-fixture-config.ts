@@ -14,6 +14,10 @@ export default class TestFixtureConfig {
   private constructor(private supportedApis: string[]) { }
 
   pickApi(options: PickApiOptions = {}): string {
+    if (options.preferredApi && this.supportedApis.find(x => x === options.preferredApi)) {
+      return options.preferredApi;
+    }
+
     return this.supportedApis[0];
   }
 }
