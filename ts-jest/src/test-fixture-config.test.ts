@@ -25,10 +25,12 @@ describe('TestFixtureConfig', () => {
       });
 
       it('picks mock mode, during integration', () => {
+        //TODO KDK: This means the nonintegrate pipeline needs to be updated
         expect(subject.pickApi({ preferredApi: 'mock' })).toEqual('mock');
       });
 
       it('picks mock mode, during pre-release', () => {
+        //TODO KDK: This means the prerelease pipeline needs to be updated
         expect(subject.pickApi()).toEqual('mock');
       });
 
