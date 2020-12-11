@@ -49,7 +49,7 @@ This work will need to be done in two PRs and two stories, to jive with the way 
 
 1. PLEX-3402 already exists, and it's the story I've been working on.  Use this for the update to
    `spinnaker-modules` (see below).
-1. A distinct story needs to be created for the update to GFR, and it needs to be in the `Grubhub
+2. A distinct story needs to be created for the update to GFR, and it needs to be in the `Grubhub
    for Restaurants` project in JIRA.  Commiting a PLEX- story to GFR messes things up during the
    release, so it's got to start with GFR-.
 
@@ -65,13 +65,13 @@ This work will need to be done in two PRs and two stories, to jive with the way 
     which e2es have made it all the way through the conversion process.  These e2es should run in
     `mock` mode instead of `real` mode during prerelease, so that we get the incremental benefit of
     an e2e completing the process without waiting for all e2es to be converted (which will take too
-    long).
+    long).  **See the example code below for these two changes**
   * configure the pickup-preorders e2e
     (`projects/restaurant/subapps/gfr-orders/e2e/configurable-fixture/pickup-orders-preorders-e2e.js`)
     to designate itself as `TestDriverConfig::externallyMonitored` instead of
     `TestDriverConfig::withMockAndRealAPISupport`.
 
-1. Documentation in `gfr-orders` could use a table describing how e2es run given their current phase
+2. Documentation in `gfr-orders` could use a table describing how e2es run given their current phase
    in the conversion process and the value (or abscence of) `PREFERRED_API`:
    * phase 1-2 e2es support mock mode only.  They run that way all the time, regardless of
      `PREFERRED_API`.  You know an e2e is in this phase because it says
@@ -94,6 +94,135 @@ This work will need to be done in two PRs and two stories, to jive with the way 
        `PREFERRED_API=mock yarn e2e`.  Note this has fewer caveats about "support" because all e2es
        start the conversion process by adding support for mock mode (they always start in phase 1).
 
+`test-driver-config.ts`
+
+Here's a prototype for how the API-selection logic should work, which needs to be merged with the
+existing logic in `test-driver-config.js`.  The prototype is in TypeScript because it helped me
+think, but the code to update is plain ES6.
+
+```typescript
+export default class TestDriverConfig {
+  static withOnlyMockAPISupport(): TestDriverConfig {
+    return new TestDriverConfig(false, ['mock']);
+  }
+
+  static withMockAndRealAPISupport(): TestDriverConfig {
+    return new TestDriverConfig(false, ['mock', 'real']);
+  }
+
+  static externallyMonitored(): TestDriverConfig {
+    return new TestDriverConfig(true, ['mock', 'real']);
+  }
+
+  private constructor(private isExternallyMonitored: boolean, private supportedApis: string[]) { }
+
+  pickApi(options: PickApiOptions = {}): string {
+    if(options.preferredApi && this.isSupported(options.preferredApi)) {
+      return options.preferredApi;
+    } else if(options.preferredApi === 'mock-monitored' && this.isExternallyMonitored) {
+      return 'mock';
+    } else if(options.preferredApi === 'mock-monitored' && !this.isExternallyMonitored && this.isSupported('real')) {
+      return 'real';
+    } else {
+      //Default to mock mode when no preference given (integration) or fall back when preferred API not supported
+      return 'mock';
+    }
+  }
+
+  isSupported(api: string): boolean {
+    return this.supportedApis.find(x => x === api) && true || false;
+  }
+}
+
+interface PickApiOptions {
+  preferredApi?: string
+}
+```
+
+`test-driver-config-test.ts`
+
+I also wrote a test to support my thinking.  There's not a good way to run this in the GFR e2e order
+code right now, and I don't think that would be a great idea anyway (testing the test code).  But
+I'll include it here in case it helps clarify intent or verify functionality.
+
+```typescript
+import TestDriverConfig from './test-driver-config';
+
+describe('TestDriverConfig', () => {
+  let subject: TestDriverConfig;
+
+  describe('#pickApi', () => {
+    describe('when running during development', () => {
+      it('picks mock mode for an e2e that supports mock mode (phase 1-2)', () => {
+        subject = TestDriverConfig.withOnlyMockAPISupport();
+        expect(subject.pickApi({ preferredApi: 'mock' })).toEqual('mock');
+      });
+
+      it('picks mock mode for an e2e that supports mock and real mode (phase 3)', () => {
+        subject = TestDriverConfig.withMockAndRealAPISupport();
+        expect(subject.pickApi({ preferredApi: 'mock' })).toEqual('mock');
+      });
+
+      it('picks mock mode for a monitored e2e that supports mock and real mode (phase 4)', () => {
+        subject = TestDriverConfig.externallyMonitored();
+        expect(subject.pickApi({ preferredApi: 'mock' })).toEqual('mock');
+      });
+    });
+
+    describe('when running integration', () => {
+      it('picks mock mode for an e2e that supports mock mode (phase 1-2)', () => {
+        subject = TestDriverConfig.withOnlyMockAPISupport();
+        expect(subject.pickApi()).toEqual('mock');
+      });
+
+      it('picks mock mode for an e2e that supports mock and real mode (phase 3)', () => {
+        subject = TestDriverConfig.withMockAndRealAPISupport();
+        expect(subject.pickApi()).toEqual('mock');
+      });
+
+      it('picks mock mode for a monitored e2e that supports mock and real mode (phase 4)', () => {
+        subject = TestDriverConfig.externallyMonitored();
+        expect(subject.pickApi()).toEqual('mock');
+      });
+    });
+
+    describe('when running prerelease', () => {
+      it('picks mock mode for an un-monitored e2e that supports mock mode (phase 1-2)', () => {
+        subject = TestDriverConfig.withOnlyMockAPISupport();
+        expect(subject.pickApi({ preferredApi: 'mock-monitored' })).toEqual('mock');
+      });
+
+      it('picks real mode for an un-monitored e2e that supports mock and real mode (phase 3)', () => {
+        subject = TestDriverConfig.withMockAndRealAPISupport();
+        expect(subject.pickApi({ preferredApi: 'mock-monitored' })).toEqual('real');
+      });
+
+      it('picks mock mode for a monitored e2e that supports mock and real mode (phase 4)', () => {
+        subject = TestDriverConfig.externallyMonitored();
+        expect(subject.pickApi({ preferredApi: 'mock-monitored' })).toEqual('mock');
+      });
+    });
+
+    describe('when running external monitoring', () => {
+      it('picks mock mode for an un-monitored e2e that supports mock mode (phase 1-2)', () => {
+        subject = TestDriverConfig.withOnlyMockAPISupport();
+        expect(subject.pickApi({ preferredApi: 'real' })).toEqual('mock');
+      });
+
+      it('picks real mode for an un-monitored e2e that supports mock and real mode (phase 3)', () => {
+        subject = TestDriverConfig.withMockAndRealAPISupport();
+        expect(subject.pickApi({ preferredApi: 'real' })).toEqual('real');
+      });
+
+      it('picks real mode for an monitored e2e that supports mock and real mode (phase 4)', () => {
+        subject = TestDriverConfig.externallyMonitored();
+        expect(subject.pickApi({ preferredApi: 'real' })).toEqual('real');
+      });
+    });
+  });
+});
+```
+
 
 #### PLEX-3402 story
 
@@ -105,12 +234,12 @@ This work will need to be done in two PRs and two stories, to jive with the way 
      https://github.com/GrubhubProd/spinnaker-modules/pull/561 
    * Only `v2/pipeline/build/gfr/gfr-e2e-prerelease.json.j2` needs to be updated this time.
 
-1. Communicate with QA (Oliver and Chris) so they know which e2es to monitor and how to run them in
+2. Communicate with QA (Oliver and Chris) so they know which e2es to monitor and how to run them in
    `real` mode.
   * Which e2es should they be running?  The `configrurableFixture` suite in `e2e-suites.js`.
   * How to run just these e2es and force them to use `real` mode?  
     `yarn e2e-real-mode --suites=configurableFixture --start-server`
 
-1. Communicate the status update to
+3. Communicate the status update to
    * `#gfr-orders-e2e-stability`
    * `#gfr-release-tracking`
