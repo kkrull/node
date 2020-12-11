@@ -1,14 +1,14 @@
-export default class TestFixtureConfig {
-  static supportingOnlyMockApis(): TestFixtureConfig {
-    return new TestFixtureConfig(false, ['mock']);
+export default class TestDriverConfig {
+  static withOnlyMockAPISupport(): TestDriverConfig {
+    return new TestDriverConfig(false, ['mock']);
   }
 
-  static supportingMockAndRealApis(): TestFixtureConfig {
-    return new TestFixtureConfig(false, ['mock', 'real']);
+  static withMockAndRealAPISupport(): TestDriverConfig {
+    return new TestDriverConfig(false, ['mock', 'real']);
   }
 
-  static externallyMonitored(): TestFixtureConfig {
-    return new TestFixtureConfig(true, ['mock', 'real']);
+  static externallyMonitored(): TestDriverConfig {
+    return new TestDriverConfig(true, ['mock', 'real']);
   }
 
   private constructor(private isExternallyMonitored: boolean, private supportedApis: string[]) { }
@@ -23,8 +23,6 @@ export default class TestFixtureConfig {
     } else {
       return 'mock';
     }
-
-    // throw Error('unsupported');
   }
 
   isSupported(api: string): boolean {
