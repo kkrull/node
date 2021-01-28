@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/kkrull/node-sandbox#readme",
   "devDependencies": {
-    "electron": "^1.8.4"
+    "electron": "^9.4.0"
   }
 }
