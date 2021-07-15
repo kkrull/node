@@ -1,0 +1,14 @@
+{
+  "author": "Kyle Krull",
+  "description": "Listens for platform events from the SalesForce event bus",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "nforce-platform-events",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.1",
+  "dependencies": {
+    "nforce": "^1.12.2"
+  }
+}
