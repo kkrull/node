@@ -5,12 +5,14 @@
   "main": "index.js",
   "name": "nforce-platform-events",
   "scripts": {
+    "env:init": "cp .env.dev.template .env.dev",
     "format": "prettier -w *.js",
-    "subscribe": "node main.js",
+    "subscribe": "NODE_ENV=dev node main.js",
     "test": "echo 'Error: no test specified' && exit 1"
   },
   "version": "0.0.1",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "nforce": "^1.12.2"
   },
   "devDependencies": {
