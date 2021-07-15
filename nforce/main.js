@@ -30,9 +30,15 @@ const password = process.env['PASSWORD'];
 const securityToken = process.env['SECURITY_TOKEN'];
 
 console.log(`Authenticating with user: ${username}`);
-org.authenticate(
-  { username, password, securityToken },
-  function (err, response) {
-    console.log('[Connection#authenticate]', err, response);
-  }
-);
+org
+  .authenticate({ username, password, securityToken })
+  .then((oauth) => {
+    console.log('[Connection#authenticate]', oauth);
+    return org.createStreamClient({ oauth });
+  })
+  .then((client) => {
+    console.log('client', client);
+
+    //TODO KDK: Crete a subscription for the event topic and add node.js event handlers
+    // const accs = client.subscribe({});
+  });
