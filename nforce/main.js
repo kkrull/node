@@ -8,7 +8,10 @@ org
   .authenticate(factory.authenticationOptions())
   .then((oauth) => org.createStreamClient({ oauth }))
   .then((client) => {
-    const accs = client.subscribe({ topic: 'event/ExpenseCRUD__e' });
+    const accs = client.subscribe({
+      isEvent: true,
+      topic: 'ExpenseCRUD__e',
+    });
 
     accs.on('error', (err) => {
       console.log('Subscription failed', err);
