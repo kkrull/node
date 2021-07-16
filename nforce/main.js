@@ -8,8 +8,14 @@ org
   .authenticate(factory.authenticationOptions())
   .then((oauth) => org.createStreamClient({ oauth }))
   .then((client) => {
-    console.log('client', client);
+    const accs = client.subscribe({ topic: 'event/ExpenseCRUD__e' });
 
-    //TODO KDK: Crete a subscription for the event topic and add node.js event handlers
-    // const accs = client.subscribe({});
+    accs.on('error', (err) => {
+      console.log('Subscription failed', err);
+      client.disconnect();
+    });
+
+    accs.on('data', (data) => {
+      console.log('Received event: ', data);
+    });
   });
