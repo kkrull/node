@@ -11,6 +11,8 @@ org
     const accs = client.subscribe({
       isEvent: true,
       topic: 'ExpenseCRUD__e',
+      replayId: -2,
+      // topic: 'bogus',
     });
 
     accs.on('error', (err) => {

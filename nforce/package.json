@@ -8,6 +8,7 @@
     "env:init": "cp .env.dev.template .env.dev",
     "format": "prettier -w *.js",
     "subscribe": "NODE_ENV=dev node main.js",
+    "subscribe:debug": "NODE_ENV=dev NODE_DEBUG=http,https node main.js",
     "test": "echo 'Error: no test specified' && exit 1"
   },
   "version": "0.0.1",
