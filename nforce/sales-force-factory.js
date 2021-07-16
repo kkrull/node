@@ -26,8 +26,7 @@ class SalesForceFactory {
   createConnection(redirectUri) {
     console.log(`Creating connection for client: ${this._env['CLIENT_ID']}`);
     return nforce.createConnection({
-      authEndpoint:
-        'https://8thlight-dev-ed.my.salesforce.com/services/oauth2/authorize',
+      authEndpoint: this._env['AUTH_ENDPOINT'],
       clientId: this._env['CLIENT_ID'],
       clientSecret: this._env['CLIENT_SECRET'],
       redirectUri,
