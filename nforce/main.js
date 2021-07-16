@@ -10,9 +10,8 @@ org
   .then((client) => {
     const accs = client.subscribe({
       isEvent: true,
-      topic: 'ExpenseCRUD__e',
+      topic: 'ExpenseUpdatedPlatformEvent__e',
       replayId: -2,
-      // topic: 'bogus',
     });
 
     accs.on('error', (err) => {
