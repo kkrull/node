@@ -1,5 +1,5 @@
-const nforce = require('nforce');
 const process = require('process');
+const sforce = require('sforcejs');
 const SalesForceFactory = require('./sales-force-factory');
 
 const factory = SalesForceFactory.forEnvironment(process.env.NODE_ENV);
@@ -9,8 +9,9 @@ org
   .then((oauth) => org.createStreamClient({ oauth }))
   .then((client) => {
     const accs = client.subscribe({
-      isEvent: true,
-      topic: 'ExpenseUpdatedPlatformEvent__e',
+      channel: '/data/Expense__ChangeEvent',
+      isCDC: true,
+      // isEvent: true,
       replayId: -2,
     });
 
@@ -20,6 +21,6 @@ org
     });
 
     accs.on('data', (data) => {
-      console.log('Received event: ', data);
+      console.log('Received event: ', JSON.stringify(data, null, 2));
     });
   });

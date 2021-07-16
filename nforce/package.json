@@ -14,7 +14,8 @@
   "version": "0.0.1",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "nforce": "^1.12.2"
+    "nforce": "^1.12.2",
+    "sforcejs": "^1.0.5"
   },
   "devDependencies": {
     "prettier": "^2.3.2"

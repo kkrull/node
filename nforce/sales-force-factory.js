@@ -1,6 +1,6 @@
-const nforce = require('nforce');
 const path = require('path');
 const process = require('process');
+const sforce = require('sforcejs');
 
 class SalesForceFactory {
   static forEnvironment(environment) {
@@ -25,7 +25,8 @@ class SalesForceFactory {
 
   createConnection(redirectUri) {
     console.log(`Creating connection for client: ${this._env['CLIENT_ID']}`);
-    return nforce.createConnection({
+    return sforce.createConnection({
+      apiVersion: 'v44.0',
       authEndpoint: this._env['AUTH_ENDPOINT'],
       clientId: this._env['CLIENT_ID'],
       clientSecret: this._env['CLIENT_SECRET'],
